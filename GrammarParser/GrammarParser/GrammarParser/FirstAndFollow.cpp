@@ -10,36 +10,71 @@
 *****************************************************************************/
 multimap<string, string> getIndex(const vector<string>& production) {
 	multimap<string, string> index;
+
+	size_t productionSize = production.size();
+	for (int i = 0; i < productionSize; i++) {
+		
+	}
+
 	return index;
 }
 
-set<string> getNonTerminal(const vector<string>& production) {
+
+
+
+struct productionRule getNonTerminal(const vector<string>& production) {
+	productionRule rule;
+	
+	set<string> terminal;
 	set<string> nonTerminal;
-	/*
-	S  -> AB
-	A  -> Ca | ~
-	B  -> cB'
-	B' -> aACB' | ~
-	C  -> b | ~
-	*/
-	string nowString;
-	int productionSize = production.size();
+	multimap<string, string> index;
+	string nowProduction,nowRecordString;
+	size_t productionSize = production.size();
+	//获取非终结符，产生式规则
 	for (int i = 0; i < productionSize; i++) {
-		nowString = production[i];
-		string::size_type subScript = nowString.find("->");
-		if(subScript==nowString.npos){
-			throw "Non-terminal analyze wrong!";
+		nowProduction = production[i];
+		bool readString=false;
+		string::size_type subScript = nowProduction.find_first_of(" ");
+
+		if(subScript==nowProduction.npos){
+			throw "Grammar analyze wrong!";
 		}
-		nonTerminal.insert(nowString.substr(0, subScript-1));
+		string 	nowNonTerminal = nowProduction.substr(0, subScript);
+		nonTerminal.insert(nowNonTerminal);
+		subScript = nowProduction.find_first_of("->");
+		if (subScript == nowProduction.npos) {
+			throw "Grammar analyze wrong!";
+		}
+		for (size_t j = subScript+2; j < nowProduction.size(); j++) {
+			if (nowProduction.at(j) == '|')
+				continue;
+			else if (nowProduction.at(j) !=' '&&readString==false) {
+				readString = true;
+				nowRecordString = nowProduction.at(j);
+			}
+			else if (nowProduction.at(j) != ' '&&readString == true) {
+				
+				nowRecordString = nowRecordString.append(""+nowProduction.at(j));
+			}
+			else if (nowProduction.at(j) == ' '&&readString == true) {
+				readString = false;
+				terminal.insert(nowRecordString);
+				index.insert(nowNonTerminal, nowRecordString);
+			}
+
+		}
 	}
-	return nonTerminal;
+	for (const auto& deleteString:nonTerminal) {
+
+	}
+	return rule;
 }
 
 
 
 set<string> getFirst(const vector<string>& production) {
 	set<string> first;
-	bool flag = 1;
+	bool flag = true;
 	multimap<string, string> mul;
 	return first;
 }

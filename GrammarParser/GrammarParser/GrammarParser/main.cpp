@@ -16,17 +16,17 @@
  *   　　　　　　 ﾚ'ヽL__|___i,___,ンﾚ|ノ
  *   　　　　　 　　　ﾄ-,/　|___./
  *   　　　　　 　　　'ｰ'　　!_,.:
- ***********************************************************************************************/
+  ***********************************************************************************************/
 #include <iostream>
 #include "FirstAndFollow.h"
 int main()
 {
 	vector<string> production;
-	production.push_back("S  -> AB");
-	production.push_back("A  -> Ca | ~");
-	production.push_back("B  -> cB'");
-	production.push_back("B' -> aACB' | ~");
-	production.push_back("C  -> b | ~");
+	production.emplace_back("S  -> AB | W | C | Q");
+	production.emplace_back("A  -> Ca | ~");
+	production.emplace_back("B  -> cB'");
+	production.emplace_back("B' -> aACB' | ~");
+	production.emplace_back("C  -> b | ~");
 	try {
 		getNonTerminal(production); 
 	}catch (const char* msg) {
@@ -34,3 +34,4 @@ int main()
 	}
     return 0;
 }
+
