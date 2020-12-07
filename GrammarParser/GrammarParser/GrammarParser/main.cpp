@@ -22,11 +22,13 @@
 int main()
 {
 	vector<string> production;
-	production.emplace_back("S  -> AB | W | C | Q");
-	production.emplace_back("A  -> Ca | ~");
-	production.emplace_back("B  -> cB'");
-	production.emplace_back("B' -> aACB' | ~");
-	production.emplace_back("C  -> b | ~");
+
+
+	production.emplace_back("S  -> AB | W | C | Q ");
+	production.emplace_back("A  -> Ca | ~ ");
+	production.emplace_back("B  -> cB' ");
+	production.emplace_back("B' -> aACB' | ~ ");
+	production.emplace_back("C  -> b | ~ ");
 	try {
 		getNonTerminal(production); 
 	}catch (const char* msg) {
