@@ -1,8 +1,10 @@
 #include "FirstAndFollow.h"
 using namespace std;
+
 FirstAndFollow::FirstAndFollow() {
 	cout << "使用本类构建First和Follow集合，调用顺序为init(),splitProductions(),getFirst(),getFollow()" << endl;
 }
+
 void FirstAndFollow::init() {
 	string line;
 	ifstream in(fileName);
@@ -59,8 +61,8 @@ void FirstAndFollow::splitProductions() {
 		}
 		cout << endl;
 	}
-
 }
+
 void FirstAndFollow::findVtAndVn() {
 	if (productions.empty())
 		throw "未初始化或者文件有误";
@@ -184,6 +186,37 @@ void FirstAndFollow::getFirst() {
 		cout <<"\b"<<" }"<< endl;
 	}
 }
+
+unordered_set<string> FirstAndFollow::getSymbolStringFirst(const string& symbolString) {
+	decltype(getSymbolStringFirst(symbolString)) First;
+	string nowString;
+	bool continueFlag = true;
+	for (int i = 0; i <= symbolString.size()&& continueFlag; i++) {
+		continueFlag = false;
+		if (i + 1 <= symbolString.size() - 1 && symbolString[i + 1] == '\'') {
+			nowString = symbolString.substr(i, 2);
+			if (first.find(nowString) != first.end()) {
+				auto copyString = first[nowString];
+				for (const auto& i :copyString) {
+					if (i == "#") continueFlag = true;
+					else First.insert(i);
+				}
+			}
+		}
+		else{
+			nowString = symbolString.substr(i,1);
+			if (first.find(nowString) != first.end()) {
+				auto copyString = first[nowString];
+				for (const auto& i : copyString) {
+					if (i == "#") continueFlag = true;
+					else First.insert(i);
+				}
+			}
+		}
+	}
+	return First;
+}
+
 void FirstAndFollow::getFollow() {
 	bool isFirst = true;
 	size_t begSize = 0;

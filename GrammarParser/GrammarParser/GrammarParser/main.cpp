@@ -19,17 +19,23 @@
   ***********************************************************************************************/
 #include <iostream>
 #include "FirstAndFollow.h"
+#include "PredictiveParsing.h"
+#include <unordered_map>
 
 int main()
 {
+	unordered_map<string, unordered_map<string, unordered_multimap<string, unordered_set<string>>>> a = {};
+	unordered_multimap<string, unordered_set<string>> q;
+	q.insert(pair<string, unordered_set<string>>{"a", { "sdaf","dsaf" }});
 	FirstAndFollow ff;
+	PredictiveParsing pp;
 	try {
 		ff.init();
 		ff.splitProductions();
 		ff.findVtAndVn();
 		ff.getFirst();
 		ff.getFollow();
-			
+		pp.getPredictiveAnalysisTable(ff);
 	}
 	catch (const char* e) {
 		cout << "There was an error: " << endl << "\t" << e << endl;
