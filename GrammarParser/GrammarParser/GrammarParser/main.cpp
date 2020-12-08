@@ -29,6 +29,7 @@ int main()
 		ff.findVtAndVn();
 		ff.getFirst();
 		ff.getFollow();
+			
 	}
 	catch (const char* e) {
 		cout << "There was an error: " << endl << "\t" << e << endl;

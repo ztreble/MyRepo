@@ -186,17 +186,23 @@ void FirstAndFollow::getFirst() {
 }
 void FirstAndFollow::getFollow() {
 	bool isFirst = true;
+	size_t begSize = 0;
+	size_t endSize = 0;
+	for(const auto& var : follow)
+	{
+		begSize += (var.second.size());
+	}
 	for (const auto& nowProduction : splitedProductions) {
+		
 		if (isFirst) {
-			follow[nowProduction.first] = { "#" };
+			follow[nowProduction.first].emplace(string{ "#" });
 			isFirst = false;
 		}
 		unordered_set<string>  RightPart = nowProduction.second;
 		for (const string& nowRightPart : RightPart) {
 			for (int i = 0; i < nowRightPart.size(); i++) {
 	//			//最后一个元素，小心i不能是'
-				if (i == nowRightPart.size() && isVn({ nowRightPart[i] })) {
-					size_t size = follow[{nowRightPart[i]}].size();
+				if (i == nowRightPart.size()-1 && isVn({ nowRightPart[i] })) {
 					for(const auto& nowCopy: follow[nowProduction.first])
 						follow[to_string(nowRightPart[i])].emplace(nowCopy);
 					//existFollow.emplace(follow(nowProduction.first));
@@ -204,15 +210,13 @@ void FirstAndFollow::getFollow() {
 				//跟随'的非终结符
 				else if (nowRightPart[i + static_cast < unsigned __int64>(1)] == '\'') {
 					string nowB = string({nowRightPart[i]}).append("'");
-					size_t size = follow[nowB].size();
 					//后面没有元素了
 					if (i + static_cast < unsigned __int64>(1) == nowRightPart.size() - 1) {
 						for (const auto& nowCopy : follow[nowProduction.first])
 							follow[nowB].emplace(nowCopy);
-
 					}
 					//后面至少有两个元素
-					else if (i + 3 >= nowRightPart.size() - 1) {
+					else if (i + 3 <= nowRightPart.size() - 1) {
 						if (nowRightPart[i + 3] == '\'') {
 							//下一个非终结符的first集合包含#
 							string tmpB = string({nowRightPart[i + 2]}).append("'");
@@ -221,20 +225,20 @@ void FirstAndFollow::getFollow() {
 									follow[nowB].emplace(nowCopy);
 							}
 							//不包含#
-							else{
+							{
 								unordered_set<string> tmpFirst = first[tmpB];
 								tmpFirst.erase("#");
 								for (const auto& nowCopy : tmpFirst)
 									follow[nowB].emplace(nowCopy);
 							}
 						}
-						else if (isVn({nowRightPart[i + 2]})) {
+						else/* if (isVn({nowRightPart[i + 2]}))*/ {
 							string tmpB = {nowRightPart[i + 2]};
 							if (first[tmpB].find("#") != first[tmpB].end()) {
 								for (const auto& nowCopy : follow[nowProduction.first])
 									follow[nowB].emplace(nowCopy);
 							}
-							else{
+							{
 								unordered_set<string> tmpFirst = first[tmpB];
 								tmpFirst.erase("#");
 								for (const auto& nowCopy : tmpFirst)
@@ -243,13 +247,13 @@ void FirstAndFollow::getFollow() {
 						}
 					}
 					//后面只有一个元素
-					else if (isVn({nowRightPart[i + 2]})) {
+					else /*if (isVn({nowRightPart[i + 2]}))*/ {
 						string tmpB ={ nowRightPart[i + 2]};
 						if (first[tmpB].find("#") != first[tmpB].end()) {
 							for (const auto& nowCopy : follow[nowProduction.first])
 								follow[nowB].emplace(nowCopy);
 						}
-						else {
+						 {
 							unordered_set<string> tmpFirst = first[tmpB];
 							tmpFirst.erase("#");
 							for (const auto& nowCopy : tmpFirst)
@@ -261,7 +265,6 @@ void FirstAndFollow::getFollow() {
 				//普通的非终结符
 				else if (isVn({nowRightPart[i]})) {
 					string nowB ={ nowRightPart[i]};
-					size_t size = follow[nowB].size();
 					//后面没有元素了
 					if (i  == nowRightPart.size() - 1) {
 						for (const auto& nowCopy : follow[nowProduction.first])
@@ -269,7 +272,7 @@ void FirstAndFollow::getFollow() {
 
 					}
 					//后面至少有两个元素
-					else if (i + 2 >= nowRightPart.size() - 1) {
+					else if (i + 2 <= nowRightPart.size() - 1) {
 						if (nowRightPart[i + 2] == '\'') {
 							//下一个非终结符的first集合包含#
 							string tmpB = string({ nowRightPart[i + 1] }).append("'");
@@ -277,20 +280,20 @@ void FirstAndFollow::getFollow() {
 								for (const auto& nowCopy : follow[nowProduction.first])
 									follow[nowB].emplace(nowCopy);
 							}
-							else {
+							{
 								unordered_set<string> tmpFirst = first[tmpB];
 								tmpFirst.erase("#");
 								for (const auto& nowCopy : tmpFirst)
 									follow[nowB].emplace(nowCopy);
 							}
 						}
-						else if (isVn({nowRightPart[i + 1]})) {
+						else /*if (isVn({nowRightPart[i + 1]}))*/ {
 							string tmpB ={ nowRightPart[i + 1]};
 							if (first[tmpB].find("#") != first[tmpB].end()) {
 								for (const auto& nowCopy : follow[nowProduction.first])
 									follow[nowB].emplace(nowCopy);
 							}
-							else {
+							{
 								unordered_set<string> tmpFirst = first[tmpB];
 								tmpFirst.erase("#");
 								for (const auto& nowCopy : tmpFirst)
@@ -299,13 +302,13 @@ void FirstAndFollow::getFollow() {
 						}
 					}
 					//后面只有一个元素
-					else if (isVn({nowRightPart[i + 1]})) {
+					else /*if (isVn({nowRightPart[i + 1]})) */{
 						string tmpB ={ nowRightPart[i + 1]};
 						if (first[tmpB].find("#") != first[tmpB].end()) {
 							for (const auto& nowCopy : follow[nowProduction.first])
 								follow[nowB].emplace(nowCopy);
 						}
-						else {
+						{
 							unordered_set<string> tmpFirst = first[tmpB];
 							tmpFirst.erase("#");
 							for (const auto& nowCopy : tmpFirst)
@@ -321,7 +324,14 @@ void FirstAndFollow::getFollow() {
 		}
 
 	}
-
+	for (const auto& var : follow)
+	{
+		endSize += (var.second.size());
+	}
+	if (begSize != endSize) {
+		getFollow();
+		return;
+	}
 	/// <summary>
 	/// 单元测试
 	/// </summary>
