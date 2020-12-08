@@ -19,21 +19,20 @@
   ***********************************************************************************************/
 #include <iostream>
 #include "FirstAndFollow.h"
+
 int main()
 {
-	vector<string> production;
-
-
-	production.emplace_back("S  -> AB | W | C | Q ");
-	production.emplace_back("A  -> Ca | ~ ");
-	production.emplace_back("B  -> cB' ");
-	production.emplace_back("B' -> aACB' | ~ ");
-	production.emplace_back("C  -> b | ~ ");
+	FirstAndFollow ff;
 	try {
-		getNonTerminal(production); 
-	}catch (const char* msg) {
-		cerr << msg << endl;
+		ff.init();
+		ff.splitProductions();
+		ff.findVtAndVn();
+		ff.getFirst();
+		ff.getFollow();
 	}
-    return 0;
+	catch (const char* e) {
+		cout << "There was an error: " << endl << "\t" << e << endl;
+	}
+	
 }
 

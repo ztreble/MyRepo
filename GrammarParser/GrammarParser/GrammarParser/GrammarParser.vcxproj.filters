@@ -23,6 +23,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Reference.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="FirstAndFollow.h">
       <Filter>头文件</Filter>
     </ClInclude>
