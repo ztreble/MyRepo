@@ -189,27 +189,40 @@ void FirstAndFollow::getFirst() {
 
 unordered_set<string> FirstAndFollow::getSymbolStringFirst(const string& symbolString) {
 	decltype(getSymbolStringFirst(symbolString)) First;
+	if (symbolString == "#")
+		return { "#" };
 	string nowString;
 	bool continueFlag = true;
-	for (int i = 0; i <= symbolString.size()&& continueFlag; i++) {
+	for (int i = 0; i < symbolString.size()&& continueFlag; i++) {
 		continueFlag = false;
 		if (i + 1 <= symbolString.size() - 1 && symbolString[i + 1] == '\'') {
 			nowString = symbolString.substr(i, 2);
 			if (first.find(nowString) != first.end()) {
 				auto copyString = first[nowString];
-				for (const auto& i :copyString) {
-					if (i == "#") continueFlag = true;
-					else First.insert(i);
+				for (const auto& j :copyString) {
+					if (j == "#") {
+						continueFlag = true;
+						if(i+1==symbolString.size())
+							First.insert("#");
+					}
+					else First.insert(j);
 				}
 			}
+			i++;
 		}
 		else{
 			nowString = symbolString.substr(i,1);
 			if (first.find(nowString) != first.end()) {
 				auto copyString = first[nowString];
-				for (const auto& i : copyString) {
-					if (i == "#") continueFlag = true;
-					else First.insert(i);
+				for (const auto& j : copyString) {
+					if (j == "#")
+					{
+						if (i  == symbolString.size())
+							First.insert("#");
+						continueFlag = true;
+					}
+					
+					else First.insert(j);
 				}
 			}
 		}

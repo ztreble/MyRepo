@@ -24,9 +24,6 @@
 
 int main()
 {
-	unordered_map<string, unordered_map<string, unordered_multimap<string, unordered_set<string>>>> a = {};
-	unordered_multimap<string, unordered_set<string>> q;
-	q.insert(pair<string, unordered_set<string>>{"a", { "sdaf","dsaf" }});
 	FirstAndFollow ff;
 	PredictiveParsing pp;
 	try {

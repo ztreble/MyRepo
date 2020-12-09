@@ -6,9 +6,11 @@
 #include "FirstAndFollow.h"
 //#include <pair>
 using namespace std;
-using table_type = unordered_map<string, unordered_map<string, unordered_multimap<string, unordered_set<string>>>>;
+using table_type = unordered_map<string, unordered_map<string, unordered_multimap<string, string>>>;
 class PredictiveParsing
 {
+	
+	
 public:
 	table_type predictiveAnalysisTable;
 	void getPredictiveAnalysisTable(FirstAndFollow&);
