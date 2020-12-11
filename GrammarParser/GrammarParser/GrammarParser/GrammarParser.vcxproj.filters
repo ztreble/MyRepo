@@ -24,6 +24,12 @@
     <ClCompile Include="PredictiveParsing.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RecursiveDescentAnalyze.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Reference.h">
@@ -36,6 +42,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="PredictiveParsing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RecursiveDescentAnalyze.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

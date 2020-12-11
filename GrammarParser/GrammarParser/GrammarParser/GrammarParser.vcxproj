@@ -155,12 +155,16 @@
     <ClCompile Include="FirstAndFollow.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PredictiveParsing.cpp" />
+    <ClCompile Include="RecursiveDescentAnalyze.cpp" />
+    <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
     <ClInclude Include="FirstAndFollow.h" />
     <ClInclude Include="PredictiveParsing.h" />
+    <ClInclude Include="RecursiveDescentAnalyze.h" />
     <ClInclude Include="Reference.h" />
+    <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

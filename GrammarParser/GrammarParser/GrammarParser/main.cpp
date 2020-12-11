@@ -21,18 +21,30 @@
 #include "FirstAndFollow.h"
 #include "PredictiveParsing.h"
 #include <unordered_map>
-
+#include<functional>
+#include "Util.h"
+void test(int a){}
+auto newFun = bind(test,1);
 int main()
 {
 	FirstAndFollow ff;
 	PredictiveParsing pp;
+
+	
+	
+
 	try {
 		ff.init();
 		ff.splitProductions();
+		//找出终结符
 		ff.findVtAndVn();
+		//消除左递归
+		Util::eliminateTheLeftRecursion(ff.noneTerminal, ff.splitedProductions);
 		ff.getFirst();
 		ff.getFollow();
 		pp.getPredictiveAnalysisTable(ff);
+
+		
 	}
 	catch (const char* e) {
 		cout << "There was an error: " << endl << "\t" << e << endl;
