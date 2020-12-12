@@ -23,6 +23,7 @@
 #include <unordered_map>
 #include<functional>
 #include "Util.h"
+#include "FirstRecursiveDescentImpl.h"
 void test(int a){}
 auto newFun = bind(test,1);
 int main()
@@ -30,8 +31,6 @@ int main()
 	FirstAndFollow ff;
 	PredictiveParsing pp;
 
-	
-	
 
 	try {
 		ff.init();
@@ -39,11 +38,11 @@ int main()
 		//找出终结符
 		ff.findVtAndVn();
 		//消除左递归
-		Util::eliminateTheLeftRecursion(ff.noneTerminal, ff.splitedProductions);
+		//Util::eliminateTheLeftRecursion(ff.noneTerminal, ff.splitedProductions);
 		ff.getFirst();
 		ff.getFollow();
 		pp.getPredictiveAnalysisTable(ff);
-
+		FirstRecursiveDescentImpl firstRecursiveDescentImpl(ff);
 		
 	}
 	catch (const char* e) {

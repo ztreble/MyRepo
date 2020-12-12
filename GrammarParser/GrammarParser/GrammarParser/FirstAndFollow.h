@@ -74,7 +74,11 @@ public:
 	bool isVt(const string& s);
 	unordered_set<string> getOneFirst(string s);//获得单个非终结符first集
 	void getFirst();//获得所有非终结符first集
+	/// <summary>
+	/// 获取字符串的First集合
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
 	unordered_set<string> getSymbolStringFirst(const string&);
 	void getFollow();//获得所有非终结符follow集
-	void SSS();//求follow集的步骤3
 };
