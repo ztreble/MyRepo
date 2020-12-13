@@ -98,7 +98,7 @@ void FirstAndFollow::findVtAndVn() {
 	}
 }
 
-bool FirstAndFollow::isVn(const string& s) {
+bool FirstAndFollow::isVn(const string& s) const {
 	if (noneTerminal.empty())
 		throw "未初始化非终结符集合";
 	if (noneTerminal.find(s) !=noneTerminal.end()) {
@@ -106,7 +106,7 @@ bool FirstAndFollow::isVn(const string& s) {
 	}
 	return false;
 }
-bool FirstAndFollow::isVt(const string& s) {
+bool FirstAndFollow::isVt(const string& s) const{
 	if (terminalSymbol.empty())
 		throw "未初始化终结符集合";
 	if (terminalSymbol.find(s) != terminalSymbol.end()) {
@@ -187,7 +187,7 @@ void FirstAndFollow::getFirst() {
 	}
 }
 
-unordered_set<string> FirstAndFollow::getSymbolStringFirst(const string& symbolString) {
+unordered_set<string> FirstAndFollow::getSymbolStringFirst(const string& symbolString){
 	decltype(getSymbolStringFirst(symbolString)) First;
 	if (symbolString == "#")
 		return { "#" };

@@ -65,13 +65,13 @@ public:
 	/// </summary>
 	/// <param name="s">字符串s</param>
 	/// <returns></returns>
-	bool isVn(const string& s);
+	bool isVn(const string& s) const;
 	/// <summary>
 	/// 判断是否是终结符
 	/// </summary>
 	/// <param name="s">字符串s</param>
 	/// <returns></returns>
-	bool isVt(const string& s);
+	bool isVt(const string& s) const;
 	unordered_set<string> getOneFirst(string s);//获得单个非终结符first集
 	void getFirst();//获得所有非终结符first集
 	/// <summary>

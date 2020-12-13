@@ -24,30 +24,47 @@
 #include<functional>
 #include "Util.h"
 #include "FirstRecursiveDescentImpl.h"
-void test(int a){}
-auto newFun = bind(test,1);
+#include "PredictiveAnalysis.h"
+#include <stack>
+/// <summary>
+/// 示例程序
+/// </summary>
+/// <returns></returns>
 int main()
 {
-	FirstAndFollow ff;
-	PredictiveParsing pp;
-
-
+	unordered_multimap<string, string> a;
 	try {
+		/// <summary>
+		/// First和Follow集构造
+		/// </summary>
+		FirstAndFollow ff;
+		/// <summary>
+		/// 预测分析表构造
+		/// </summary>
+		/// <returns></returns>
+		PredictiveParsing pp;
+		
+		//初始化和生成式分离
 		ff.init();
 		ff.splitProductions();
 		//找出终结符
 		ff.findVtAndVn();
 		//消除左递归
 		//Util::eliminateTheLeftRecursion(ff.noneTerminal, ff.splitedProductions);
+		//获取First和Follow集合
 		ff.getFirst();
 		ff.getFollow();
+		//获取预测分析表
 		pp.getPredictiveAnalysisTable(ff);
-		FirstRecursiveDescentImpl firstRecursiveDescentImpl(ff);
+		//预测分析法
+		PredictiveAnalysis pa("E", &ff, &pp);
+		pa.init();
+		//递归下降语法分析
+		//FirstRecursiveDescentImpl firstRecursiveDescentImpl(ff);
 		
 	}
 	catch (const char* e) {
 		cout << "There was an error: " << endl << "\t" << e << endl;
 	}
-	
 }
 

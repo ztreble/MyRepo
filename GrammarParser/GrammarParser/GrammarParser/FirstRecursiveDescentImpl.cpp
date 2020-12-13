@@ -4,7 +4,8 @@
 FirstRecursiveDescentImpl::FirstRecursiveDescentImpl(FirstAndFollow& ff) :schedule(0), temp(0), ff(ff),jud(true) {
 	printf("请输入字符串（长度<50，以#号结束）:\n");
 	cin >> tokens;
-	printf("%-10s %-20s %-10s %-10s\n", "文法", "分析串", "分析字符", "剩余串");
+	//此功能暂时未实现
+	//printf("%-10s %-20s %-10s %-10s\n", "文法", "分析串", "分析字符", "剩余串");
 	parse_E();
 }
 /// <summary>

@@ -1,5 +1,5 @@
 #include "PredictiveParsing.h"
-void PredictiveParsing::getPredictiveAnalysisTable(FirstAndFollow& ff) {
+void PredictiveParsing::getPredictiveAnalysisTable(FirstAndFollow& ff){
 	unordered_map<string, unordered_set<string>> splitedProductions = ff.splitedProductions;
 
 	for (const auto& nowProductions : splitedProductions) {
