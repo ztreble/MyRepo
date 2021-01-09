@@ -8,5 +8,5 @@
             (nth-element (cdr lst) (- n 1))))))
 (define report-list-too-short
   (lambda (n)
-    (error 'nthelement
+    (eopl:error 'nthelement
                 "List too short by ~s elements.~%" (+ n 1))))
