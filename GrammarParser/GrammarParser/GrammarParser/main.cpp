@@ -57,8 +57,8 @@ int main()
 		//获取预测分析表
 		pp.getPredictiveAnalysisTable(ff);
 		//预测分析法
-		PredictiveAnalysis pa("E", &ff, &pp);
-		pa.init();
+		//PredictiveAnalysis pa("E", &ff, &pp);
+		//pa.init();
 		//递归下降语法分析
 		//FirstRecursiveDescentImpl firstRecursiveDescentImpl(ff);
 		

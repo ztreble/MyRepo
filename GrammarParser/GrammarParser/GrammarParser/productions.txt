@@ -1,5 +1,6 @@
-E->TE'
-E'->+TE'|#
-T->FT'
-T'->*FT'|#
-F->(E)|i
+G->S
+S->AM
+M->S|#
+A->aE|bAA
+E->aB|bA|#
+B->bE|aBB
