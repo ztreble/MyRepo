@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Main Process",
+        "type": "node",
+        "request": "launch",
+        "cwd": "${workspaceRoot}",
+        "runtimeExecutable": "C:/Users/Administrator/AppData/Roaming/npm/electron.cmd",//这里是electron.cmd所在路径
+        "windows": {
+          "runtimeExecutable": "C:/Users/Administrator/AppData/Roaming/npm/electron.cmd"
+        },
+        "args" : ["."],
+        "program": "D:/我的文档/Documents/GitHub/proto-tyrant-JOTES/main.js",//这里是项目主进程文件所在路径
+        "protocol": "inspector" //添加默认的协议是legacy，这个协议导致不进入断点
+
+      }
+    ]
+  }

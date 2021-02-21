@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neu.mapper.DiscussionQueMapper">
+    <resultMap id="BaseResultMap" type="com.neu.entity.DiscussionQue">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+        <result column="topic_id" property="topicId" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="discussion_and" property="discussionAnd" jdbcType="INTEGER" />
+        <result column="likes" property="likes" jdbcType="INTEGER" />
+        <result column="thinks" property="thinks" jdbcType="INTEGER" />
+        <result column="surprises" property="surprises" jdbcType="INTEGER" />
+        <result column="initialize_time" property="initializeTime" jdbcType="TIMESTAMP" />
+        <result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
+        <result column="follows" property="follows" jdbcType="INTEGER" />
+        <result column="joins" property="joins" jdbcType="INTEGER" />
+        <result column="browse" property="browse" jdbcType="INTEGER" />
+    </resultMap>
+    <insert id="createDiscussionQue" useGeneratedKeys="true" keyProperty="id" parameterType="com.neu.entity.DiscussionQue">
+    INSERT INTO discussion_que (
+        creator_id,
+        topic_id,
+        title,
+        message,
+        initialize_time,
+        edit_time
+    )
+    VALUES
+        (#{creatorId},#{topicId},#{title},#{message},#{initializeTime},#{editTime})
+    </insert>
+</mapper>

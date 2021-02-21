@@ -1,0 +1,32 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/background2.jpg</file>
+        <file>res/jianting4.jpg</file>
+        <file>res/background1.jpg</file>
+        <file>res/feiji1.png</file>
+        <file>res/missile.png</file>
+        <file>res/missile2.jpg</file>
+        <file>res/lanjiedan.jpg</file>
+        <file>res/jianting5.png</file>
+        <file>res/baozha1.png</file>
+        <file>res/begin1.jpg</file>
+        <file>res/begin2.jpg</file>
+        <file>res/close1.jpg</file>
+        <file>res/plane.png</file>
+        <file>res/jianting.png</file>
+        <file>res/background.jpg</file>
+        <file>res/background3.jpg</file>
+        <file>res/begin .jpg</file>
+        <file>res/close.jpg</file>
+        <file>res/feiji1.jpg</file>
+        <file>res/feiji2.jpg</file>
+        <file>res/geiji.png</file>
+        <file>res/jianting.jpg</file>
+        <file>res/jianting1.jpg</file>
+        <file>res/jianting2.jpg</file>
+        <file>res/jianting3.jpg</file>
+        <file>res/jianting4.png</file>
+        <file>res/missile1.jpg</file>
+        <file>res/火.png</file>
+    </qresource>
+</RCC>
