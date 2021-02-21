@@ -13,6 +13,7 @@ SSM+nginx 仿力扣网站
 扬州大学os课设
 ### build-cpu
 logisim搭建单周期Mips-cpu
+文件过大，链接： https://github.com/ztreble/build-a-cpu
 ### 游戏和工具
 #### tools-whois-suspect
 谁是嫌疑犯？C++做的Linux小游戏
@@ -20,3 +21,5 @@ logisim搭建单周期Mips-cpu
 奥林匹克比赛模拟，C++小游戏
 #### tools-compare-tool
 用于高精度时间对比的工具
+#### go-tool
+golang并发服务器和爬虫小demo
