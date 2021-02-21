@@ -1,0 +1,6 @@
+G->S
+S->AM
+M->S|#
+A->aE|bAA
+E->aB|bA|#
+B->bE|aBB
