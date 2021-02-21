@@ -1,0 +1,11 @@
+S->Sabc|abc|bc|c
+Q->Sab|ab|b
+R->Sa|a
+
+
+E->TE'
+E'->+TE'|#
+T->FT'
+T'->*FT'|#
+F->(E)|i
+

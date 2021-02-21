@@ -1,3 +1,0 @@
-S->Sabc|abc|bc|c
-Q->Sab|ab|b
-R->Sa|a
