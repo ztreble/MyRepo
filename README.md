@@ -9,8 +9,12 @@ Java教学评价管理系统，QT前端SSM后端
 QT无人机作战仿真模拟
 ### our-leetcode
 SSM+nginx 仿力扣网站
-### os-design
-扬州大学os课设
+### curriculum-design
+来自世界各地的大学课设
+#### EECS2030
+练习递归的Java画图小程序
+#### yangzhou-university-os-design
+扬州大学os课设，质量值得称道
 ### build-cpu
 logisim搭建单周期Mips-cpu
 文件过大，链接： https://github.com/ztreble/build-a-cpu
