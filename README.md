@@ -16,7 +16,7 @@ SSM+nginx 仿力扣网站
 #### EECS2030
 练习递归的Java画图小程序
 #### yangzhou-university-os-design
-扬州大学os课设，质量值得称道
+扬州大学os课设
 ### build-cpu
 logisim搭建单周期Mips-cpu
 文件过大，链接： https://github.com/ztreble/build-a-cpu
