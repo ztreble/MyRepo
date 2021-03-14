@@ -1,0 +1,15 @@
+/home/treblez/Desktop/clion-2020.3.2/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/treblez/Desktop/Github/BuddhaServer/sylar
+-- Found Boost: /usr/include (found version "1.65.1")  
+-- You will link dynamically to the MySQL client library (set with -DMYSQLCLIENT_STATIC_LINKING=<bool>)
+-- Searching for dynamic libraries with the base name(s) "mysqlclient_r mysqlclient"
+CMake Error at cmake/FindMySQL.cmake:520 (message):
+  Could not find "mysql.h" from searching "/usr/include/mysql
+  /usr/local/include/mysql /opt/mysql/mysql/include
+  /opt/mysql/mysql/include/mysql /usr/local/mysql/include
+  /usr/local/mysql/include/mysql /MySQL/*/include /MySQL/*/include"
+Call Stack (most recent call first):
+  CMakeLists.txt:33 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/home/treblez/Desktop/Github/BuddhaServer/sylar/cmake-build-debug/CMakeFiles/CMakeOutput.log".
