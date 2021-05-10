@@ -59,7 +59,7 @@ fun longest_string4 (xs : string list) =
 					      then true else false) xs ""
 			 
 fun longest_capitalized (xs : string list) =
-    (longest_string2 o only_capitals) xs
+    (longest_string1 o only_capitals) xs
 
 
 fun rev_string (str : string) =
@@ -99,7 +99,7 @@ fun check_pat p =
 	    case p of
 		TupleP ps => (List.foldl (fn (a,b:string list) => b@(helper1 a)) [] ps)
 	      | Variable x => [x]
-	      | ConstructorP(x,s) => [x]@(helper1 s)
+	      | ConstructorP(_,s) =>(helper1 s)
 	      | _ => [] ;
 	fun helper2 l =
 	     case l of
@@ -121,12 +121,13 @@ fun check_pat p =
 	    helper2 tmp
 	end
     end
-	
+
+	(*
 fun all_answers f li =
     let
 	fun helper f li now = 
 		   case li of
-		       [] => if now = [] then NONE else SOME now
+		       [] => SOME now
 		      |x::xs'  =>
 		       let
 			   val tmpAns =(f x)
@@ -138,7 +139,17 @@ fun all_answers f li =
     in
 	helper f li []
     end
-
+	*)
+	fun all_answers f x =
+    let fun aux(xs, acc) =
+	   case xs of
+	   [] => SOME acc
+	   | head::tail => (case f(head) of
+                			       NONE =>  NONE
+    							   | SOME v => aux(tail, v @ acc))
+    in
+	  aux (x,[])
+    end
 
 	    
 fun match(v, pat) =
@@ -158,3 +169,4 @@ fun match(v, pat) =
 fun first_match v pl =
     SOME (first_answer (match) (List.map(fn(x) => (v,x)) pl))
 			handle NoAnswer => NONE
+ 
