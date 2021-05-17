@@ -7,6 +7,9 @@
 编译器前端和一个lisp-parser，已经施工完成词法、语法分析器
 #### jotes
 Java教学评价管理系统，QT前端SSM后端
+#### ProgrammingLanguage
+华盛顿大学ProgrammingLanguage课设，使用sml和racket学习函数式编程。
+B部分做了一个mini interpreter
 ### missile
 QT无人机作战仿真模拟
 ### our-leetcode
