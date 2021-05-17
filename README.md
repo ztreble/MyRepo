@@ -23,7 +23,6 @@ SSM+nginx 仿力扣网站
 ### build-cpu
 logisim搭建单周期Mips-cpu
 文件过大，链接： https://github.com/ztreble/build-a-cpu
-### 游戏和工具
 #### tools-whois-suspect
 谁是嫌疑犯？C++做的Linux小游戏
 #### tools-octathlon
