@@ -1,6 +1,8 @@
 package trebelz.jvav.classfile;
 
+import trebelz.jvav.classfile.constinfotype.ConstantClassInfo;
 import trebelz.jvav.classfile.constinfotype.ConstantInfo;
+import trebelz.jvav.classfile.constinfotype.ConstantNameAndTypeInfo;
 import trebelz.jvav.classfile.constinfotype.ConstantUtf8Info;
 
 /**
@@ -15,7 +17,7 @@ public class ConstantPool {
     // If a CONSTANT_Long_info or CONSTANT_Double_info structure is the item in the constant_pool
     // table at index n, then the next usable item in the pool is located at index n+2.
     // The constant_pool index n+1 must be valid but is considered unusable.
-    private final ConstantInfo[] cp;
+    public ConstantInfo[] cp;
 //    ConstantPool(){
 //        constantPool = new ConstantInfo[cpCount];
 //    }
@@ -26,17 +28,18 @@ public class ConstantPool {
      * 有效的索引是1-n
      *
      */
-    ConstantPool(ClassReader reader) throws Exception {
+    public ConstantPool readConstantPool(ClassReader reader) throws Exception {
         // 表头值
         var cpCount = (int)(reader.readUint16());
-        cp = new ConstantInfo[cpCount];
+        var tmpCp =  new ConstantPool(new ConstantInfo[cpCount]);
 
         // The constant_pool table is indexed from 1 to constant_pool_count - 1.
         for(var i = 1; i < cpCount; i++ ){
-            cp[i] = ConstantInfo.readConstantInfo(reader, cp);
-            var tmp = cp[i].getClass().getName();
+            tmpCp.cp[i] = ConstantInfo.readConstantInfo(reader, tmpCp);
+            var tmp = tmpCp.cp[i].getClass().getName();
             switch (tmp) {
                 // long 和 double 在常量池中占两个位置
+                //TODO: 2021/11/12 这个地方有问题
                 case "ConstantLongInfo", "ConstantDoubleInfo" -> {
                     i++;
                     break;
@@ -46,6 +49,13 @@ public class ConstantPool {
                 }
             }
         }
+        return tmpCp;
+    }
+
+    ConstantPool() {
+    }
+    ConstantPool(ConstantInfo[] cp) {
+        this.cp = cp;
     }
 
     /**
@@ -68,19 +78,19 @@ public class ConstantPool {
      * @return
      */
     public String getName(char index) throws Exception {
-        var ntInfo = getConstantInfo(index);
+        var ntInfo = (ConstantNameAndTypeInfo)getConstantInfo(index);
         return getUtf8(ntInfo.nameIndex);
     }
     public String getType(char index) throws Exception {
-        var ntInfo = getConstantInfo(index);
+        var ntInfo = (ConstantNameAndTypeInfo)getConstantInfo(index);
         return getUtf8(ntInfo.descriptorIndex);
     }
     /**
      * 从常量池中查找类名
-     * @param ConstantPool
+     * @param
      */
     public String getClassName(int index) throws Exception {
-        var classInfo = getConstantInfo(index);
+        var classInfo = (ConstantClassInfo)getConstantInfo(index);
         return getUtf8(classInfo.nameIndex);
     }
 

@@ -1,5 +1,7 @@
 package trebelz.jvav.classfile;
 
+import trebelz.jvav.classfile.attributetable.AttributeInfo;
+
 import javax.swing.*;
 
 /**
@@ -17,19 +19,19 @@ public class MemberInfo {
     private char descriptorIndex;
     private AttributeInfo[]    attributes;
 
-    MemberInfo(ClassReader reader, ConstantPool cp){
+    MemberInfo(ClassReader reader, ConstantPool cp) throws Exception {
         this.cp = cp;
         this.accessFlags = reader.readUint16();
         this.nameIndex = reader.readUint16();
         this.descriptorIndex = reader.readUint16();
-        this.attributes = readAttrubutes(reader,cp);
+        this.attributes = AttributeInfo.readAttributes(reader,cp);
     }
     /**
      * 读取字段或方法数据
      * @param
      * @return
      */
-    public static MemberInfo[] readMembers(ClassReader reader,ConstantPool cp)  {
+    public static MemberInfo[] readMembers(ClassReader reader,ConstantPool cp) throws Exception {
         var memberCount = reader.readUint16();
         MemberInfo[] members = new MemberInfo[memberCount];
         for(int i=0;i<memberCount;i++){

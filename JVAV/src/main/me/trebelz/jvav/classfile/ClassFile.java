@@ -1,5 +1,7 @@
 package trebelz.jvav.classfile;
 
+import trebelz.jvav.classfile.attributetable.AttributeInfo;
+
 /**
  * @author treblez
  * @Description class文件定义和解析
@@ -28,10 +30,18 @@ public class ClassFile {
         ClassReader cr = new ClassReader(classData);
         read(cr);
     }
+
+//    static ClassFile parser(byte[] classData) throws Exception {
+//        var cr = new ClassReader(classData);
+//        var cf = new ClassFile();
+//
+//    }
+
     void read(ClassReader reader) throws Exception {
         readAndCheckMagic(reader);
         readAndCheckVersion(reader);
-        constantPool = readConstantPool(reader);
+        // 读取常量池
+        constantPool = new ConstantPool().readConstantPool(reader);
         //类访问标志
         accessFlags = reader.readUint16();
         /*
@@ -47,7 +57,7 @@ public class ClassFile {
         // 方法表
         methods = MemberInfo.readMembers(reader, constantPool);
         // 属性表
-        attributes = readAttributes(reader, constantPool);
+        attributes = AttributeInfo.readAttributes(reader, constantPool);
     }
 
     /**
@@ -82,15 +92,6 @@ public class ClassFile {
         throw new Exception("java.lang.UnsupportedClassVersionError!");
     }
 
-    /**
-     * 解析常量池
-     * @return
-     */
-    public ConstantPool readConstantPool(ClassReader reader){
-
-
-
-    }
 
 
     /**
@@ -129,7 +130,7 @@ public class ClassFile {
     /**
      * 从常量池查找类名
      */
-    public String getClassName(){
+    public String getClassName() throws Exception {
         return constantPool.getClassName(thisClass);
     }
 
@@ -137,7 +138,7 @@ public class ClassFile {
      * 从常量池查找超类名
      * @return 名称
      */
-    public String getSuperClassName(){
+    public String getSuperClassName() throws Exception {
         if(superClass>0){
             return constantPool.getClassName(superClass);
         }
@@ -148,7 +149,7 @@ public class ClassFile {
      * 从常量池查找接口名
      * @return 接口名
      */
-    public String[] getInterfaceNames(){
+    public String[] getInterfaceNames() throws Exception {
         String[] ret = new String[interfaces.length];
         for(int i=0;i<interfaces.length;i++){
             ret[i] = constantPool.getClassName(interfaces[i]);
