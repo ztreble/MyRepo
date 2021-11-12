@@ -1,0 +1,21 @@
+命令
+查看当前路径 pwd
+查看进程 lsof netstat
+内存检查 free ps vmstat
+磁盘信息 iostat df
+检查内存泄漏 ps -aux
+查看文件的命令cat more less tail head
+PS
+PPID:父进程PID:进程IDPGID:进程组IDSID:会话IDTTY:终端名称STAT:进程状态
+top
+负载，cpu，内存
+free
+total used free shared buff
+lsof 
+-i指定端口
+查看连接数
+netstat -anp
+
+rank() over (partition by order by)
+dense_rank() over()
+row_number() over
