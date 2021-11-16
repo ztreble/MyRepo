@@ -38,7 +38,9 @@ public class ClassFile {
 //    }
 
     void read(ClassReader reader) throws Exception {
+        // 验证魔数
         readAndCheckMagic(reader);
+        // 验证版本号
         readAndCheckVersion(reader);
         // 读取常量池
         constantPool = new ConstantPool().readConstantPool(reader);
@@ -100,8 +102,6 @@ public class ClassFile {
      * 访问级别
      * @return
      */
-
-
 
 
     public int getMinorVersion() {

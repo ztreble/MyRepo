@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 
 public interface ConstantInfo {
-//常量池标签
+    //常量池标签
     int CONSTANT_CLASS = 7;
     int CONSTANT_FIELDREF = 9;
     int CONSTANT_METHODREF = 10;
