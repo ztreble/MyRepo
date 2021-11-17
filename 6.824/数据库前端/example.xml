@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<employees>
+    <employee>
+        <name>David</name>
+        <gender>male</gender>
+        <salary>3100</salary>
+        <department>Production</department>
+    </employee>
+    <employee>
+        <name>Patrick</name>
+        <gender>male</gender>
+        <salary>4300</salary>
+        <department>Research</department>
+    </employee>
+    <employee>
+        <name>Lisa</name>
+        <gender>female</gender>
+        <salary>2800</salary>
+        <department>HumanResource</department>
+    </employee>
+    <employee>
+        <name>Michael</name>
+        <gender>male</gender>
+        <salary>3700</salary>
+        <department>Accouting</department>
+    </employee>
+    <employee>
+        <name>Emma</name>
+        <gender>female</gender>
+        <salary>2600</salary>
+        <department>Purchasing</department>
+    </employee>
+    <employee>
+        <name>Alice</name>
+        <gender>female</gender>
+        <salary>2700</salary>
+        <department>Marketing</department>
+    </employee>
+</employees>
