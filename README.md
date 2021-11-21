@@ -35,3 +35,5 @@ logisim搭建单周期Mips-cpu
 golang并发服务器和爬虫小demo
 #### 一些笔记
 八股文
+#### DBMS
+Shell写的练习用简单数据库，使用flock和pipe实现concurrent consistency
