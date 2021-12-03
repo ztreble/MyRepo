@@ -53,5 +53,12 @@ public class OperandStack {
     public Object popRef()  {
         return slots[size--].ref;
     }
-
+    public void pushSlot(Slot slot){
+        slots[size] = slot;
+        size++;
+    }
+    public Slot popSlot(){
+        size--;
+        return slots[size];
+    }
 }

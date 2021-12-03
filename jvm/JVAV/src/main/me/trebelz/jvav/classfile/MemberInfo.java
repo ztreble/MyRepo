@@ -1,12 +1,14 @@
 package trebelz.jvav.classfile;
 
 import trebelz.jvav.classfile.attributetable.AttributeInfo;
+import trebelz.jvav.classfile.attributetable.CodeAttribute;
 
 import javax.swing.*;
 
 /**
  * 存储字段和方法信息
  * 字段和方法有自己的访问标志，常量池索引，描述符，属性表
+ * @author treblez
  */
 public class MemberInfo {
 
@@ -54,8 +56,21 @@ public class MemberInfo {
      * 从常量池查找字段或方法描述符
      * @return
      */
-    public String Descriptor() throws Exception {
+    public String descriptor() throws Exception {
         return cp.getUtf8(descriptorIndex);
     }
 
+    /**
+     * 获取code属性
+     * @return
+     * todo 判断类型
+     */
+    public CodeAttribute codeAttribute(){
+        for(var attrInfo:attributes){
+            switch (attrInfo.toString()){
+                case "CodeAttribute"->{ return (CodeAttribute) attrInfo;}
+            }
+        }
+        return null;
+    }
 }

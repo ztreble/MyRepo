@@ -7,15 +7,18 @@ public class JVMFrame {
     /**
      *
      */
-    JVMFrame next;
+    public JVMFrame next;
     /**
      * 局部变量表 局部变量表和操作数栈的大小由编译器预先计算好，存放在method_info的code中
      */
-    LocalVars localVars;
+    public LocalVars localVars;
     /**
      * 操作数栈
      */
-    OperandStack operandStack;
+    public OperandStack operandStack;
+
+    private int nextPC;
+
 
     public JVMFrame(int maxLocals, int maxStack){
         localVars = new LocalVars(maxLocals);
@@ -27,5 +30,13 @@ public class JVMFrame {
 
     public OperandStack getOperandStack() {
         return operandStack;
+    }
+
+    public int getNextPC() {
+        return nextPC;
+    }
+
+    public void setNextPC(int nextPC){
+        this.nextPC = nextPC;
     }
 }

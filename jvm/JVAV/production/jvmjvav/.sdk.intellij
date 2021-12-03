@@ -1,0 +1,23 @@
+{
+  "vendor" : "Oracle",
+  "product" : "OpenJDK",
+  "default" : true,
+  "jdk_version_major" : 17,
+  "jdk_version" : "17.0.1",
+  "suggested_sdk_name" : "openjdk-17",
+  "shared_index_aliases" : [ "openjdk-17.0.1", "openjdk-17", "17.0.1", "17" ],
+  "packages" : [ {
+    "os" : "windows",
+    "arch" : "x86_64",
+    "url" : "https://download.java.net/java/GA/jdk17.0.1/2a2082e5a09d4267845be086888add4f/12/GPL/openjdk-17.0.1_windows-x64_bin.zip",
+    "package_type" : "zip",
+    "unpack_prefix_filter" : "jdk-17.0.1",
+    "package_root_prefix" : "jdk-17.0.1",
+    "package_to_java_home_prefix" : "",
+    "archive_file_name" : "openjdk-17.0.1_windows-x64_bin.zip",
+    "install_folder_name" : "openjdk-17.0.1",
+    "archive_size" : 185693378,
+    "unpacked_size" : 308047087,
+    "sha256" : "329900a6673b237b502bdcf77bc334da34bc91355c5fd2d457fc00f53fd71ef1"
+  } ]
+}

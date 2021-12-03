@@ -10,7 +10,7 @@ import java.awt.*;
  * 否则当前方法为本地方法，pc寄存器中的值没有意义。
  *
  */
-public class Thread {
+public class JVMThread {
     /**
      * 指令寄存器
      */
@@ -21,7 +21,7 @@ public class Thread {
      虚拟机栈由栈帧构成，帧中保存方法执行的状态，包括局部变量表，操作数栈等。
      */
     private JVMStack stack;
-    Thread(){
+    public JVMThread(){
         stack = new JVMStack(1024);
 
     }
@@ -42,5 +42,8 @@ public class Thread {
     public JVMFrame currentFrame() throws Exception {
         return stack.top();
     }
+    public JVMFrame newFrame(int maxLocals, int maxStack){
+        return new JVMFrame(maxLocals,maxStack);
+    };
 
 }
