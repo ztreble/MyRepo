@@ -80,7 +80,7 @@ public class CodeAttribute implements AttributeInfo {
         var  codeLength = reader.readUint32();
         this.code = reader.readBytes(codeLength);
         this.exceptionTable = readExceptionTable(reader);
-        this.attributes = readAttributes(reader, cp);
+        this.attributes = AttributeInfo.readAttributes(reader, cp);
     }
     ExceptionTableEntry[] readExceptionTable(ClassReader reader){
         var exceptionTableLength = reader.readUint16();

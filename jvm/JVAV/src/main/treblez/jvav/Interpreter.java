@@ -39,6 +39,7 @@ public class Interpreter {
         var reader = new BytecodeReader();
 
         for (; ; ) {
+            //计算pc
             var pc = frame.getNextPC();
             thread.setPc(pc);
 
@@ -47,12 +48,13 @@ public class Interpreter {
             byte opcode = reader.readUint8();
             var inst = InstructionFactory.newInstruction(opcode);
 
+            assert inst != null;
             inst.fetchOperands(reader);
             frame.setNextPC(reader.getPc());
 
             // execute 执行指令
-//            fmt.Printf("pc:%2d inst:%T %v\n", pc, inst, inst)
-//            inst.Execute(frame);
+            System.out.printf("pc:%2d inst:%T %v\n", pc, inst, inst);
+            inst.execute(frame);
         }
     }
 }

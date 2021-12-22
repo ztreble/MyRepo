@@ -1,17 +1,19 @@
 package treblez.jvav.instruction.control;
 
 import treblez.jvav.instruction.base.BytecodeReader;
+import treblez.jvav.instruction.base.Instruction;
 import treblez.jvav.rtda.JVMFrame;
 
 /**
  * @author treblez
  */
 
-public class TableSwitch {
+public class TableSwitch implements Instruction {
     int defaultOffset;
     int low;
     int high;
     int[] jumpOffsets;
+    @Override
     public void fetchOperands(BytecodeReader reader){
         reader.skipPadding();
         //默认情况下执行跳转所需要的字节码偏移量
@@ -21,6 +23,7 @@ public class TableSwitch {
         var jumpOffsetsCount = high - low + 1;
         jumpOffsets = reader.readInt32s(jumpOffsetsCount);
     }
+    @Override
     public void execute(JVMFrame frame){
         var index = frame.getOperandStack().popInt();
         int offset;

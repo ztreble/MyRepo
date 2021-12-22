@@ -12,11 +12,12 @@ import treblez.jvav.rtda.JVMFrame;
  * 用于扩展方法的指令局部变量表
  * 扩展指令宽度
  */
-public class Wide {
+public class Wide implements Instruction{
     //被改变的指令
     Instruction modifiedInstruction;
 
-    void FetchOperands(BytecodeReader reader) throws Exception {
+    @Override
+    public void fetchOperands(BytecodeReader reader) throws Exception {
 //todo byte是否有问题？
         var opcode = reader.readUint8();
         //解码modifiedInstruction
@@ -105,6 +106,7 @@ public class Wide {
         }
     }
 
+    @Override
     public void execute(JVMFrame frame) {
         modifiedInstruction.execute(frame);
     }

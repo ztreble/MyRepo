@@ -41,9 +41,9 @@ class Main {
         var cf = loadClass(className,cp);
         System.out.println(cmd._class);
         printClassInfo(cf);*/
-        var frame = new JVMFrame(100,100,100);
-        testLocalVars(frame.getLocalVars());
-        testOperandStack(frame.getOperandStack());
+        //var frame = new JVMFrame(100,100,100);
+       // testLocalVars(frame.getLocalVars());
+        // testOperandStack(frame.getOperandStack());
     }
 
     public static void testLocalVars(LocalVars vars) {

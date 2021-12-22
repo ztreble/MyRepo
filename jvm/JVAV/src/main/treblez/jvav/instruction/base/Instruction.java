@@ -12,7 +12,7 @@ public interface Instruction {
      * @param reader
      *
      */
-    void fetchOperands(BytecodeReader reader);
+    void fetchOperands(BytecodeReader reader) throws Exception;
 
     /**
      * 执行指令逻辑

@@ -8,6 +8,7 @@ package treblez.jvav.instruction.control;
 
 import treblez.jvav.instruction.base.BranchLogic;
 import treblez.jvav.instruction.base.BytecodeReader;
+import treblez.jvav.instruction.base.Instruction;
 import treblez.jvav.rtda.JVMFrame;
 
 /**
@@ -24,16 +25,18 @@ npairs4
 match-offset pairs...
  * @author treblez
  */
-public class LookUpSwitch {
+public class LookUpSwitch implements Instruction {
     int defaultOffset;
     int npairs;
     int[] matchOffsets;
+    @Override
     public void fetchOperands(BytecodeReader reader){
         reader.skipPadding();
         defaultOffset = reader.readInt32();
         npairs = reader.readInt32();
         matchOffsets = reader.readInt32s(npairs*2);
     }
+    @Override
     public void execute(JVMFrame frame){
         var key = frame.getOperandStack().popInt();
         for(int i=0;i<npairs*2;i+=2){
