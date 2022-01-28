@@ -37,3 +37,11 @@ golang并发服务器和爬虫小demo
 八股文
 #### DBMS
 Shell写的练习用简单数据库，使用flock和pipe实现concurrent consistency
+#### CIS194
+Haskell课程代码
+#### CS6340
+llvm课程lab以及答案
+#### 6.830
+数据库课程代码
+#### jvm
+java写的jvm虚拟机
