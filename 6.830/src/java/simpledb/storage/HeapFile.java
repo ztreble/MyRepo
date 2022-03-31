@@ -4,6 +4,7 @@ import simpledb.common.Database;
 import simpledb.common.DbException;
 import simpledb.common.Debug;
 import simpledb.common.Permissions;
+import simpledb.transaction.Transaction;
 import simpledb.transaction.TransactionAbortedException;
 import simpledb.transaction.TransactionId;
 
@@ -19,9 +20,20 @@ import java.util.*;
  * 
  * @see HeapPage#HeapPage
  * @author Sam Madden
+ * 没有排序的行数据文件
+ * 包含一组物理页，大小固定 物理页的类型是 HeapPage
+ * 物理页存储在buffer pool中，通过HeapFile类读写
+ * 业内存储行数据 每个表对应一个heapfile对象
+ * 每一页中包含很多slot，每个slot是留给一行的位置
+ * header是每一页中tuple slot的bitmap
+ * 如果bitmap某个bit是1 则tuple有效
+ *
+ * 每一个tuple需要 typle size*8 bit大小的内容和 1 bit 的header
+ *
  */
 public class HeapFile implements DbFile {
-
+    private final File file;
+    private final TupleDesc tupleDesc;
     /**
      * Constructs a heap file backed by the specified file.
      * 
@@ -31,6 +43,8 @@ public class HeapFile implements DbFile {
      */
     public HeapFile(File f, TupleDesc td) {
         // some code goes here
+        this.file = f;
+        this.tupleDesc = td;
     }
 
     /**
@@ -40,7 +54,7 @@ public class HeapFile implements DbFile {
      */
     public File getFile() {
         // some code goes here
-        return null;
+        return file;
     }
 
     /**
@@ -49,12 +63,12 @@ public class HeapFile implements DbFile {
      * HeapFile has a "unique id," and that you always return the same value for
      * a particular HeapFile. We suggest hashing the absolute file name of the
      * file underlying the heapfile, i.e. f.getAbsoluteFile().hashCode().
-     * 
+     *
      * @return an ID uniquely identifying this HeapFile.
      */
     public int getId() {
         // some code goes here
-        throw new UnsupportedOperationException("implement this");
+        return file.getAbsoluteFile().hashCode();
     }
 
     /**
@@ -64,13 +78,43 @@ public class HeapFile implements DbFile {
      */
     public TupleDesc getTupleDesc() {
         // some code goes here
-        throw new UnsupportedOperationException("implement this");
+        return tupleDesc;
     }
 
     // see DbFile.java for javadocs
     public Page readPage(PageId pid) {
         // some code goes here
-        return null;
+        // 表id 页号
+        var tableId = pid.getTableId();
+        int pgNo = pid.getPageNumber();
+
+        RandomAccessFile f = null;
+        try{
+            f = new RandomAccessFile(file,"r");
+            if((pgNo+1)*BufferPool.getPageSize() > f.length()){
+                f.close();
+                throw new IllegalArgumentException(String.format("table %d page %d is invalid", tableId, pgNo));
+            }
+            byte[] bytes = new byte[BufferPool.getPageSize()];
+            f.seek(pgNo * BufferPool.getPageSize());
+            // big end
+            int read = f.read(bytes,0,BufferPool.getPageSize());
+            if(read != BufferPool.getPageSize()){
+                throw new IllegalArgumentException(String.format("table %d page %d read %d bytes", tableId, pgNo, read));
+            }
+            HeapPageId id = new HeapPageId(pid.getTableId(),pid.getPageNumber());
+            return new HeapPage(id,bytes);
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            try{
+                f.close();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("table %d page %d is invalid", tableId, pgNo));
+
     }
 
     // see DbFile.java for javadocs
@@ -84,7 +128,8 @@ public class HeapFile implements DbFile {
      */
     public int numPages() {
         // some code goes here
-        return 0;
+        int num = (int)Math.floor(file.length()*1.0/BufferPool.getPageSize());
+        return num;
     }
 
     // see DbFile.java for javadocs
@@ -107,6 +152,70 @@ public class HeapFile implements DbFile {
     public DbFileIterator iterator(TransactionId tid) {
         // some code goes here
         return null;
+    }
+    private static final class HeapFileIterator implements DbFileIterator{
+        private final HeapFile heapFile;
+        private final TransactionId tid;
+        private Iterator<Tuple> it;
+        private int whichPage;
+
+        public HeapFileIterator(HeapFile file, TransactionId tid){
+            this.heapFile = file;
+            this.tid = tid;
+        }
+        @Override
+        public void open() throws DbException, TransactionAbortedException {
+            whichPage = 0;
+            it = getPageTuples(whichPage);
+        }
+
+        private Iterator<Tuple> getPageTuples(int pageNumber) throws TransactionAbortedException, DbException{
+            if(pageNumber >= 0 && pageNumber < heapFile.numPages()){
+                HeapPageId pid = new HeapPageId(heapFile.getId(),pageNumber);
+                HeapPage page = (HeapPage)Database.getBufferPool().getPage(tid, pid, Permissions.READ_ONLY);
+                return page.iterator();
+            }else{
+                throw new DbException(String.format("heapfile %d does not contain page %d!", pageNumber,heapFile.getId()));
+            }
+        }
+
+
+        @Override
+        public boolean hasNext() throws DbException, TransactionAbortedException {
+            if(it == null){
+                return false;
+            }
+            if(!it.hasNext()){
+                if(whichPage < (heapFile.numPages()-1)){
+                    whichPage++;
+                    it = getPageTuples(whichPage);
+                    return it.hasNext();
+                }else{
+                    return false;
+                }
+            }else{
+                return true;
+            }
+        }
+
+        @Override
+        public Tuple next() throws DbException, TransactionAbortedException, NoSuchElementException {
+            if(it == null || !it.hasNext()){
+                throw new NoSuchElementException();
+            }
+            return it.next();
+        }
+
+        @Override
+        public void rewind() throws DbException, TransactionAbortedException {
+            close();
+            open();
+        }
+
+        @Override
+        public void close() {
+            it = null;
+        }
     }
 
 }

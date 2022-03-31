@@ -1,0 +1,121 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						3
+					],
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "base",
+					"childIndexes" : 
+					[
+						2
+					],
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "base",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "base/tests",
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "base/tests",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "tests",
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "tests",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"name" : "Project",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 3,
+					"id" : "HTTPClient::@a44f0ac069e85531cdee",
+					"jsonFile" : "target-HTTPClient-Debug-33a9d668f9315405c9bd.json",
+					"name" : "HTTPClient",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 2,
+					"id" : "LoggingTest::@2c408e4d1913c8ab02e6",
+					"jsonFile" : "target-LoggingTest-Debug-1fd336a69e19d964ca3d.json",
+					"name" : "LoggingTest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "WebServer::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-WebServer-Debug-d7e958191f73458b18f7.json",
+					"name" : "WebServer",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "libserver_base::@4506b02e7a4fef989908",
+					"jsonFile" : "target-libserver_base-Debug-185a48c7bacc572c9bb4.json",
+					"name" : "libserver_base",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)",
+		"source" : "C:/Users/treblez/Desktop/MyRepo/BuddhaServer"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 1
+	}
+}

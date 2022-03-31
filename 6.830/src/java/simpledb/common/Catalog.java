@@ -18,17 +18,42 @@ import java.util.concurrent.ConcurrentHashMap;
  * For now, this is a stub catalog that must be populated with tables by a
  * user program before it can be used -- eventually, this should be converted
  * to a catalog that reads a catalog table from disk.
- * 
+ *   catalog类描述的是数据库实例。包含了数据库现有的表信息以及表的schema信息。现在需要实现添加新表
+ *   的功能，以及从特定的表中提取信息。提取信息时通过表对应的TupleDesc对象决定操作的字段类型和数量。
+ *
+ *   全局catalog是分配给整个SimpleDB进程的Catalog类一个实例，可以
+ *   通过方法Database.getCatalog()获得，global buffer pool可以通过方法Database.getBufferPool()获得。
+ * ————————————————
  * @Threadsafe
  */
 public class Catalog {
+    private static final long serialVersionUID = 1L;
+    private final ConcurrentHashMap<Integer,Table> hashTable;
+
+    private static class Table{
+        private static final long serialVersionUID = 1L;
+
+        public final DbFile dbFile;
+        public final String tableName;
+        public final String pk;
+
+        public Table(DbFile file,String name,String pkeyField){
+            dbFile = file;
+            tableName = name;
+            pk = pkeyField;
+        }
+
+        public String toString(){
+            return tableName + "(" + dbFile.getId() + ":" + pk +")";
+        }
+    }
 
     /**
      * Constructor.
      * Creates a new, empty catalog.
      */
     public Catalog() {
-        // some code goes here
+        hashTable = new ConcurrentHashMap<Integer, Table>();
     }
 
     /**
@@ -42,6 +67,8 @@ public class Catalog {
      */
     public void addTable(DbFile file, String name, String pkeyField) {
         // some code goes here
+        Table t = new Table(file,name,pkeyField);
+        hashTable.put(file.getId(),t);
     }
 
     public void addTable(DbFile file, String name) {
@@ -65,6 +92,10 @@ public class Catalog {
      */
     public int getTableId(String name) throws NoSuchElementException {
         // some code goes here
+        var ret = hashTable.searchValues(1,value->{
+            if(value.tableName.equals(name)) return value.dbFile.getId();
+            return null;
+        });
         return 0;
     }
 
@@ -76,7 +107,12 @@ public class Catalog {
      */
     public TupleDesc getTupleDesc(int tableid) throws NoSuchElementException {
         // some code goes here
-        return null;
+        var t = hashTable.getOrDefault(tableid,null);
+        if(t!=null){
+            return t.dbFile.getTupleDesc();
+        }else{
+            throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -87,27 +123,42 @@ public class Catalog {
      */
     public DbFile getDatabaseFile(int tableid) throws NoSuchElementException {
         // some code goes here
-        return null;
+        Table t = hashTable.getOrDefault(tableid,null);
+        if(t != null){
+            return t.dbFile;
+        }else{
+            throw new NoSuchElementException("not found db file for table " + tableid);
+        }
     }
 
     public String getPrimaryKey(int tableid) {
-        // some code goes here
-        return null;
+        Table t = hashTable.getOrDefault(tableid,null);
+        if(t != null){
+            return t.pk;
+        }else{
+            throw new NoSuchElementException("not found primary key for table " + tableid);
+        }
     }
 
     public Iterator<Integer> tableIdIterator() {
-        // some code goes here
-        return null;
+        // 返回一个内部引用，并且指向一个内部类对象，该内部类重写了迭代器方法
+        return hashTable.keySet().iterator();
     }
 
     public String getTableName(int id) {
         // some code goes here
-        return null;
+        Table t = hashTable.getOrDefault(id,null);
+        if(t != null){
+            return t.tableName;
+        }else{
+            throw new NoSuchElementException("not found name for table " + id);
+        }
     }
     
     /** Delete all tables from the catalog */
     public void clear() {
         // some code goes here
+        hashTable.clear();
     }
     
     /**

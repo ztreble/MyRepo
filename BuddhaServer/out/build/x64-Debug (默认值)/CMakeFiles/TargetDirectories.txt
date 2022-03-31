@@ -1,0 +1,12 @@
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/CMakeFiles/WebServer.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/CMakeFiles/edit_cache.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/CMakeFiles/rebuild_cache.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/base/CMakeFiles/rebuild_cache.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/base/CMakeFiles/libserver_base.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/base/CMakeFiles/edit_cache.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/base/tests/CMakeFiles/LoggingTest.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/base/tests/CMakeFiles/edit_cache.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/base/tests/CMakeFiles/rebuild_cache.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/tests/CMakeFiles/HTTPClient.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/tests/CMakeFiles/edit_cache.dir
+C:/Users/treblez/Desktop/MyRepo/BuddhaServer/out/build/x64-Debug (默认值)/tests/CMakeFiles/rebuild_cache.dir

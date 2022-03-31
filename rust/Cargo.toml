@@ -1,0 +1,7 @@
+[package]
+name="hello_world"
+version="1.45.0"
+[dependencies]
+frunk = "0.3.2"
+time = "0.1.12"
+regex = "0.1.41"
